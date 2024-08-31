@@ -13,6 +13,6 @@
         <appender-ref ref="CONSOLE" />
     </root>
 
-    <logger name="com.github.ivsokol.poe" level="TRACE"/>
+    <logger name="io.github.ivsokol.poe" level="TRACE"/>
 
 </configuration>

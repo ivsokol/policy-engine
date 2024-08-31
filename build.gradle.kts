@@ -15,7 +15,7 @@ plugins {
   id("org.jreleaser") version "1.13.1"
 }
 
-group = "com.github.ivsokol"
+group = "io.github.ivsokol"
 
 version = "1.0.0"
 
@@ -86,7 +86,7 @@ jreleaser {
       license = "https://opensource.org/licenses/Apache-2.0"
     }
     java {
-      groupId = "com.github.ivsokol"
+      groupId = "io.github.ivsokol"
       artifactId = "poe"
     }
     signing {
@@ -118,7 +118,7 @@ jreleaser {
 publishing {
   publications {
     create<MavenPublication>("mavenKotlin") {
-      groupId = "com.github.ivsokol"
+      groupId = "io.github.ivsokol"
       artifactId = "poe"
       version = project.version.toString()
       from(components["java"])
