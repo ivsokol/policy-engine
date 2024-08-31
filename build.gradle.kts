@@ -105,8 +105,8 @@ jreleaser {
             url = "https://central.sonatype.com/api/v1/publisher"
             stagingRepository("build/staging-deploy")
             applyMavenCentralRules = true
-            username = System.getenv("MAVEN_CENTRAL_USERNAME")
-            password = System.getenv("MAVEN_CENTRAL_PASSWORD")
+            username = System.getenv("MAVEN_USERNAME")
+            password = System.getenv("MAVEN_PASSWORD")
           }
         }
       }
