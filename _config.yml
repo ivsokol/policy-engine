@@ -29,6 +29,7 @@ repository: ivsokol/poe # for github-metadata
 
 # Build settings
 theme: just-the-docs
+remote_theme: just-the-docs/just-the-docs
 
 permalink: pretty
 
