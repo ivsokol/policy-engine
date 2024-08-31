@@ -17,4 +17,4 @@ jobs:
       uses: gradle/actions/setup-gradle@v4
 
     - name: Execute Gradle check
-      run: ./gradlew -Dorg.gradle.caching=false check
+      run: ./gradlew clean check
