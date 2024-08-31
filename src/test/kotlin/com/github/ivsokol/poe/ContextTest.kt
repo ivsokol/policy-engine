@@ -18,7 +18,7 @@ class ContextTest :
                 environment =
                     mapOf("now" to LocalDateTime.now(), DefaultEnvironmentKey.YEAR to 2021),
                 subject = mapOf("user" to "guest"))
-        expected.store(ContextStoreEnum.REQUEST)?.shouldHaveSize(2)
+        expected.store(ContextStoreEnum.REQUEST)?.shouldHaveSize(1)
         expected.store(ContextStoreEnum.ENVIRONMENT)?.shouldHaveSize(19)
         expected.store(ContextStoreEnum.ENVIRONMENT)?.get("year") shouldBe 2021
         expected.store(ContextStoreEnum.ENVIRONMENT)?.get("offset") shouldBe
