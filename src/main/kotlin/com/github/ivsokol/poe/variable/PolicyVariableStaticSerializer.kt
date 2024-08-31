@@ -1,3 +1,5 @@
+@file:Suppress("UNCHECKED_CAST")
+
 package com.github.ivsokol.poe.variable
 
 import com.github.ivsokol.poe.SemVer
