@@ -1,0 +1,18 @@
+<!-- logback-test.xml -->
+<configuration debug="true">
+
+    <!-- Console Appender -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %marker %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Logger Configuration -->
+    <root level="trace">
+        <appender-ref ref="CONSOLE" />
+    </root>
+
+    <logger name="com.github.ivsokol.poe" level="TRACE"/>
+
+</configuration>
