@@ -6,3 +6,5 @@ vendor
 .gradle/
 build/
 .idea/
+.env
+.secrets
