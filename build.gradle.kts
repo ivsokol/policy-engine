@@ -91,12 +91,9 @@ jreleaser {
     }
     signing {
       setActive("ALWAYS")
-      armored = true }
-    release {
-      github {
-        overwrite = true
-      }
+      armored = true
     }
+    release { github { overwrite = true } }
     deploy {
       maven {
         mavenCentral {
@@ -108,10 +105,10 @@ jreleaser {
           }
         }
         github {
-            create("github"){
-              setActive("ALWAYS")
-                stagingRepository("build/staging-deploy")
-            }
+          create("github") {
+            setActive("ALWAYS")
+            stagingRepository("build/staging-deploy")
+          }
         }
       }
     }
