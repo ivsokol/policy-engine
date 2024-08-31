@@ -89,25 +89,29 @@ jreleaser {
       groupId = "com.github.ivsokol"
       artifactId = "poe"
     }
-    signing { armored = true }
+    signing {
+      setActive("ALWAYS")
+      armored = true }
     release {
       github {
-        enabled = true
-        token = System.getenv("GITHUB_TOKEN")
         overwrite = true
       }
     }
     deploy {
       maven {
         mavenCentral {
-          create("app") {
-            enabled = true
+          create("maven-central") {
+            setActive("ALWAYS")
             url = "https://central.sonatype.com/api/v1/publisher"
             stagingRepository("build/staging-deploy")
             applyMavenCentralRules = true
-            username = System.getenv("MAVEN_USERNAME")
-            password = System.getenv("MAVEN_PASSWORD")
           }
+        }
+        github {
+            create("github"){
+              setActive("ALWAYS")
+                stagingRepository("build/staging-deploy")
+            }
         }
       }
     }
