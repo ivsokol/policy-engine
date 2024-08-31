@@ -50,3 +50,6 @@ Gemfile.lock
 docs/
 .idea/
 .kotlin/
+
+.secrets
+.env

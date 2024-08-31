@@ -98,7 +98,7 @@ jreleaser {
       maven {
         mavenCentral {
           create("maven-central") {
-            setActive("ALWAYS")
+            setActive("NEVER")
             url = "https://central.sonatype.com/api/v1/publisher"
             stagingRepository("build/staging-deploy")
             applyMavenCentralRules = true
