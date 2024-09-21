@@ -1,7 +1,7 @@
 ---
 title: Managed vs Embedded entities
 description: Differentiation between managed and embedded entities
-nav_order: 9
+nav_order: 11
 ---
 # Managed vs Embedded entities
 
