@@ -60,9 +60,8 @@ data class PolicyActionJsonPatch(
     val failOnExistingKey: Boolean? = null,
     val failOnNullSource: Boolean? = null,
     val castNullSourceToArray: Boolean? = null,
-) : io.github.ivsokol.poe.action.IPolicyAction {
-  override val type: io.github.ivsokol.poe.action.ActionTypeEnum =
-      io.github.ivsokol.poe.action.ActionTypeEnum.JSON_PATCH
+) : IPolicyAction {
+  override val type: ActionTypeEnum = ActionTypeEnum.JSON_PATCH
 
   @Transient private val logger = LoggerFactory.getLogger(this::class.java)
 
@@ -122,7 +121,7 @@ data class PolicyActionJsonPatch(
     val dataStore = context.dataStore()
 
     if (dataStore.containsKey(key)) {
-      if (failOnExistingKey ?: io.github.ivsokol.poe.action.FAIL_ON_EXISTING_KEY_DEFAULT) {
+      if (failOnExistingKey ?: FAIL_ON_EXISTING_KEY_DEFAULT) {
         // add to event
         context.event.add(
             context.id,
@@ -137,7 +136,7 @@ data class PolicyActionJsonPatch(
         return false
       }
     } else {
-      if (failOnMissingKey ?: io.github.ivsokol.poe.action.FAIL_ON_MISSING_KEY_DEFAULT) {
+      if (failOnMissingKey ?: FAIL_ON_MISSING_KEY_DEFAULT) {
         // add to event
         context.event.add(
             context.id,
@@ -166,7 +165,7 @@ data class PolicyActionJsonPatch(
                 marker)
             ?.resolve(context, policyCatalog) ?: NullVariableValue()
     context.removeLastFromPath()
-    if ((failOnNullSource ?: io.github.ivsokol.poe.action.FAIL_ON_NULL_SOURCE_DEFAULT) &&
+    if ((failOnNullSource ?: FAIL_ON_NULL_SOURCE_DEFAULT) &&
         sourceVariableValue.type == VariableRuntimeTypeEnum.NULL) {
       // add to event
       context.event.add(
@@ -212,8 +211,7 @@ data class PolicyActionJsonPatch(
     }
     val sourceValue: JsonNode =
         if (sourceVariableValue.type == VariableRuntimeTypeEnum.NULL)
-            if (castNullSourceToArray
-                ?: io.github.ivsokol.poe.action.CAST_NULL_SOURCE_TO_ARRAY_DEFAULT)
+            if (castNullSourceToArray ?: CAST_NULL_SOURCE_TO_ARRAY_DEFAULT)
                 context.options.objectMapper.createArrayNode()
             else context.options.objectMapper.createObjectNode()
         else sourceVariableValue.body as JsonNode

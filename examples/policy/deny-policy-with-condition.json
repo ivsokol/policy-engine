@@ -1,0 +1,37 @@
+{
+    "constraint": {
+        "id": "customerScoringEvent",
+        "refType": "PolicyConditionRef"
+    },
+    "actions": [
+        {
+            "action": {
+                "id": "setCustomerAsMinor",
+                "refType": "PolicyActionRef"
+            },
+            "executionMode": [
+                "onDeny"
+            ]
+        }
+    ],
+    "actionExecutionStrategy": "runAll",
+    "ignoreErrors": false,
+    "targetEffect": "deny",
+    "condition": {
+        "operation": "LessThan",
+        "args": [
+            {
+                "resolvers": [
+                    {
+                        "id": "birthdayResolver",
+                        "refType": "PolicyVariableResolverRef"
+                    }
+                ]
+            },
+            {
+                "type": "int",
+                "value": 18
+            }
+        ]
+    }
+}

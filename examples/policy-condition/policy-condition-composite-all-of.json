@@ -1,0 +1,19 @@
+{
+    "conditionCombinationLogic": "allOf",
+    "conditions": [
+        {
+            "operation": "IsBlank",
+            "args": [
+                {
+                    "id": "polVar1",
+                    "refType": "PolicyVariableRef"
+                }
+            ]
+        },
+        {
+            "id": "polCond1",
+            "refType": "PolicyConditionRef"
+        }
+    ],
+    "strictCheck": false
+}

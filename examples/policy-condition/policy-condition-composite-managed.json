@@ -1,0 +1,20 @@
+{
+    "id": "polCond1",
+    "version": "1.2.3",
+    "description": "This is a managed PolicyConditionComposite",
+    "labels": [
+        "label1"
+    ],
+    "conditionCombinationLogic": "not",
+    "conditions": [
+        {
+            "operation": "IsBlank",
+            "args": [
+                {
+                    "id": "polVar1",
+                    "refType": "PolicyVariableRef"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+{
+    "id": "polAct1",
+    "version": "1.2.3",
+    "description": "This is a managed PolicyActionJsonPatch",
+    "labels": [
+        "label1"
+    ],
+    "key": "someJson",
+    "source": {
+        "id": "polVar1",
+        "refType": "PolicyVariableRef"
+    },
+    "patch": {
+        "type": "string",
+        "value": "[{\"op\":\"replace\",\"path\":\"/foo\",\"value\":[\"bar\"]}]"
+    },
+    "failOnMissingKey": true,
+    "failOnNullSource": true,
+    "type": "jsonPatch"
+}

@@ -17,7 +17,7 @@ plugins {
 
 group = "io.github.ivsokol"
 
-version = "1.0.0"
+version = "1.1.0"
 
 repositories {
   mavenLocal()
@@ -82,7 +82,7 @@ jreleaser {
     license = "Apache-2.0"
     maintainer("Ivan Sokol")
     links {
-      homepage = "https://ivsokol.github.io/poe"
+      homepage = "https://ivsokol.github.io/policy-engine"
       license = "https://opensource.org/licenses/Apache-2.0"
     }
     java {
@@ -126,8 +126,8 @@ publishing {
       pom {
         name = "PolicyEngine"
         description =
-            "PolicyEngine - PoE is a catalog driven policy engine written in Kotlin. It provides a flexible and extensible framework for defining and evaluating policies and conditions based on the provided context."
-        url = "https://ivsokol.github.io/poe"
+            "PolicyEngine - PoE is a catalog driven policy engine written in Kotlin. It provides a flexible framework for defining and evaluating policies and conditions based on the provided context with expression language support."
+        url = "https://ivsokol.github.io/policy-engine"
         licenses {
           license {
             name = "The Apache License, Version 2.0"
@@ -142,8 +142,8 @@ publishing {
           }
         }
         scm {
-          connection = "scm:git:https://ivsokol.github.io/poe.git"
-          url = "https://ivsokol.github.io/poe"
+          connection = "scm:git:https://ivsokol.github.io/policy-engine.git"
+          url = "https://ivsokol.github.io/policy-engine"
         }
       }
     }

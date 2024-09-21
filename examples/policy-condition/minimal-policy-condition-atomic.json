@@ -1,0 +1,13 @@
+{
+    "operation": "GreaterThan",
+    "args": [
+        {
+            "id": "polVar1",
+            "refType": "PolicyVariableRef"
+        },
+        {
+            "type": "int",
+            "value": 42
+        }
+    ]
+}

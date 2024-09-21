@@ -1,0 +1,29 @@
+{
+    "conditionCombinationLogic": "nOf",
+    "conditions": [
+        {
+            "operation": "IsBlank",
+            "args": [
+                {
+                    "id": "polVar1",
+                    "refType": "PolicyVariableRef"
+                }
+            ]
+        },
+        {
+            "operation": "IsEmpty",
+            "args": [
+                {
+                    "id": "polVar2",
+                    "refType": "PolicyVariableRef"
+                }
+            ]
+        },
+        {
+            "id": "polCond1",
+            "refType": "PolicyConditionRef"
+        }
+    ],
+    "minimumConditions": 2,
+    "optimizeNOfRun": false
+}

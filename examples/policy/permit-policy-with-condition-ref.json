@@ -1,0 +1,7 @@
+{
+    "targetEffect": "permit",
+    "condition": {
+        "id": "polCond1",
+        "refType": "PolicyConditionRef"
+    }
+}

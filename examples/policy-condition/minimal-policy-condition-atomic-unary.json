@@ -1,0 +1,9 @@
+{
+    "operation": "IsBlank",
+    "args": [
+        {
+            "id": "polVar1",
+            "refType": "PolicyVariableRef"
+        }
+    ]
+}

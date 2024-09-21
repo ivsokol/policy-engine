@@ -1,0 +1,14 @@
+{
+    "operation": "Equals",
+    "args": [
+        {
+            "id": "polVar1",
+            "refType": "PolicyVariableRef"
+        },
+        {
+            "type": "string",
+            "value": "fooBar"
+        }
+    ],
+    "stringIgnoreCase": true
+}

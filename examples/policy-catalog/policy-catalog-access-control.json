@@ -1,0 +1,249 @@
+{
+    "id": "access-control",
+    "version": "2024-02-17",
+    "policies": [
+        {
+            "id": "userAccess",
+            "description": "Allows access to regular user if it is working day and working hour",
+            "targetEffect": "permit",
+            "condition": {
+                "id": "regularUserAccess",
+                "refType": "PolicyConditionRef"
+            },
+            "strictTargetEffect": true
+        },
+        {
+            "id": "adminAccess",
+            "description": "Allows access to admin user",
+            "targetEffect": "permit",
+            "condition": {
+                "id": "isAdmin",
+                "refType": "PolicyConditionRef"
+            },
+            "strictTargetEffect": true
+        },
+        {
+            "id": "checkAccess",
+            "description": "Checks if user has access",
+            "actions": [
+                {
+                    "action": {
+                        "id": "setForbiddenMessage",
+                        "refType": "PolicyActionRef"
+                    },
+                    "executionMode": [
+                        "onDeny"
+                    ]
+                },
+                {
+                    "action": {
+                        "id": "setAllowedMessage",
+                        "refType": "PolicyActionRef"
+                    },
+                    "executionMode": [
+                        "onPermit"
+                    ]
+                }
+            ],
+            "policyCombinationLogic": "denyUnlessPermit",
+            "policies": [
+                {
+                    "policy": {
+                        "id": "userAccess",
+                        "refType": "PolicyRef"
+                    }
+                },
+                {
+                    "policy": {
+                        "id": "adminAccess",
+                        "refType": "PolicyRef"
+                    },
+                    "priority": 10
+                }
+            ]
+        }
+    ],
+    "policyConditions": [
+        {
+            "id": "isAdmin",
+            "description": "Checks if provided role is equal to 'admin'",
+            "operation": "Equals",
+            "args": [
+                {
+                    "type": "string",
+                    "value": "admin"
+                },
+                {
+                    "id": "role",
+                    "refType": "PolicyVariableRef"
+                }
+            ],
+            "stringIgnoreCase": true
+        },
+        {
+            "id": "isUser",
+            "description": "Checks if provided role is equal to 'user'",
+            "operation": "Equals",
+            "args": [
+                {
+                    "type": "string",
+                    "value": "user"
+                },
+                {
+                    "id": "role",
+                    "refType": "PolicyVariableRef"
+                }
+            ],
+            "stringIgnoreCase": true
+        },
+        {
+            "id": "isWorkingDay",
+            "description": "Checks if it is working day currently (Mon-Fri)",
+            "operation": "LessThanEqual",
+            "args": [
+                {
+                    "id": "dayOfWeek",
+                    "refType": "PolicyVariableRef"
+                },
+                {
+                    "type": "int",
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "id": "isWorkingHour",
+            "description": "Checks if it is working hour currently (09:00-17:00)",
+            "conditionCombinationLogic": "allOf",
+            "conditions": [
+                {
+                    "operation": "GreaterThanEqual",
+                    "args": [
+                        {
+                            "id": "currentTime",
+                            "refType": "PolicyVariableRef"
+                        },
+                        {
+                            "type": "string",
+                            "format": "time",
+                            "timeFormat": "HH:mm",
+                            "value": "09:00"
+                        }
+                    ]
+                },
+                {
+                    "operation": "LessThanEqual",
+                    "args": [
+                        {
+                            "id": "currentTime",
+                            "refType": "PolicyVariableRef"
+                        },
+                        {
+                            "type": "string",
+                            "format": "time",
+                            "timeFormat": "HH:mm",
+                            "value": "17:00"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "regularUserAccess",
+            "description": "Checks if user has role 'user' and if it is a working day and working hour",
+            "conditionCombinationLogic": "allOf",
+            "conditions": [
+                {
+                    "id": "isUser",
+                    "refType": "PolicyConditionRef"
+                },
+                {
+                    "id": "isWorkingDay",
+                    "refType": "PolicyConditionRef"
+                },
+                {
+                    "id": "isWorkingHour",
+                    "refType": "PolicyConditionRef"
+                }
+            ]
+        }
+    ],
+    "policyVariables": [
+        {
+            "id": "role",
+            "description": "Provided role",
+            "resolvers": [
+                {
+                    "id": "roleResolver",
+                    "refType": "PolicyVariableResolverRef"
+                }
+            ],
+            "type": "string"
+        },
+        {
+            "id": "currentTime",
+            "description": "Current time",
+            "resolvers": [
+                {
+                    "source": "environment",
+                    "key": "localTime"
+                }
+            ],
+            "type": "string",
+            "format": "time"
+        },
+        {
+            "id": "dayOfWeek",
+            "description": "Current day of week",
+            "resolvers": [
+                {
+                    "source": "environment",
+                    "key": "dayOfWeek"
+                }
+            ],
+            "type": "int"
+        }
+    ],
+    "policyVariableResolvers": [
+        {
+            "id": "roleResolver",
+            "description": "Extracts role from subject store",
+            "source": "subject",
+            "key": "role"
+        }
+    ],
+    "policyActions": [
+        {
+            "id": "setForbiddenMessage",
+            "description": "Sets message for user for which access has been denied",
+            "key": "message",
+            "value": {
+                "resolvers": [
+                    {
+                        "source": "subject",
+                        "path": "\"Access has been denied for \" + .username",
+                        "engine": "JQ"
+                    }
+                ],
+                "type": "string"
+            },
+            "type": "save"
+        },
+        {
+            "id": "setAllowedMessage",
+            "description": "Sets message for user who has been granted access",
+            "key": "message",
+            "value": {
+                "resolvers": [
+                    {
+                        "source": "subject",
+                        "path": "\"Access has been granted for \" + .username",
+                        "engine": "JQ"
+                    }
+                ],
+                "type": "string"
+            },
+            "type": "save"
+        }
+    ]
+}

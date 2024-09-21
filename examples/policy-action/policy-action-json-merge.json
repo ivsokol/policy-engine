@@ -1,0 +1,12 @@
+{
+    "key": "someJson",
+    "source": {
+        "type": "string",
+        "value": "{\"foo\":\"bar\"}"
+    },
+    "merge": {
+        "type": "string",
+        "value": "{\"foo\":\"baz\"}"
+    },
+    "type": "jsonMerge"
+}

@@ -1,0 +1,21 @@
+{
+    "id": "polVal1",
+    "version": "1.2.3",
+    "description": "This is a managed PolicyVariableDynamic",
+    "labels": [
+        "label1",
+        "label2"
+    ],
+    "resolvers": [
+        {
+            "id": "polVarRes1",
+            "version": "1.2.3",
+            "refType": "PolicyVariableResolverRef"
+        },
+        {
+            "key": "duration"
+        }
+    ],
+    "type": "string",
+    "format": "duration"
+}

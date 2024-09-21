@@ -1,0 +1,12 @@
+{
+    "key": "someJson",
+    "source": {
+        "type": "string",
+        "value": "{\"foo\":[\"bar\",\"baz\"],\"foo2\":\"baz\"}"
+    },
+    "patch": {
+        "type": "string",
+        "value": "[{\"op\":\"replace\",\"path\":\"/foo\",\"value\":[\"bar\"]}]"
+    },
+    "type": "jsonPatch"
+}

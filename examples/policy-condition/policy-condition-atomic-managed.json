@@ -1,0 +1,20 @@
+{
+    "id": "polCond1",
+    "version": "1.2.3",
+    "description": "This is a managed PolicyConditionAtomic",
+    "labels": [
+        "label1"
+    ],
+    "operation": "Equals",
+    "args": [
+        {
+            "id": "polVar1",
+            "refType": "PolicyVariableRef"
+        },
+        {
+            "type": "string",
+            "value": "fooBar"
+        }
+    ],
+    "stringIgnoreCase": true
+}

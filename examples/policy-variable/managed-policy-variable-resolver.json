@@ -1,0 +1,13 @@
+{
+    "id": "polValRes1",
+    "version": "1.2.3",
+    "description": "This is a managed PolicyVariableResolver",
+    "labels": [
+        "label1",
+        "label2"
+    ],
+    "source": "subject",
+    "key": "foo",
+    "path": "a1.a2",
+    "engine": "JMESPath"
+}

@@ -1,0 +1,12 @@
+{
+    "id": "polVal1",
+    "version": "1.2.3",
+    "description": "This is a managed PolicyVariableStatic",
+    "labels": [
+        "label1",
+        "label2"
+    ],
+    "type": "string",
+    "format": "duration",
+    "value": "PT1H"
+}

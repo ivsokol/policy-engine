@@ -1,0 +1,17 @@
+{
+    "policyCombinationLogic": "permitUnlessDeny",
+    "policies": [
+        {
+            "policy": {
+                "id": "isCustomerMinor",
+                "refType": "PolicyRef"
+            }
+        },
+        {
+            "policy": {
+                "id": "isCustomerInFraudList",
+                "refType": "PolicyRef"
+            }
+        }
+    ]
+}

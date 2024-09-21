@@ -1,0 +1,24 @@
+{
+    "id": "isScoringPositive",
+    "version": "1.0.0",
+    "description": "Denys customers below 18 years old",
+    "labels": [
+        "customer",
+        "scoring"
+    ],
+    "policyCombinationLogic": "permitUnlessDeny",
+    "policies": [
+        {
+            "policy": {
+                "id": "isCustomerMinor",
+                "refType": "PolicyRef"
+            }
+        },
+        {
+            "policy": {
+                "id": "isCustomerInFraudList",
+                "refType": "PolicyRef"
+            }
+        }
+    ]
+}

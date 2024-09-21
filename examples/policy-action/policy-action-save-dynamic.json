@@ -1,0 +1,14 @@
+{
+    "key": "foo",
+    "value": {
+        "resolvers": [
+            {
+                "id": "birthdayResolver",
+                "refType": "PolicyVariableResolverRef"
+            }
+        ]
+    },
+    "failOnMissingKey": true,
+    "failOnNullSource": true,
+    "type": "save"
+}

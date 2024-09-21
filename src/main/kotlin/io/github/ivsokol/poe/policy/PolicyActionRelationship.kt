@@ -16,8 +16,8 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class PolicyActionRelationship(
+    val action: IPolicyActionRefOrValue,
     val constraint: IPolicyConditionRefOrValue? = null,
     val executionMode: Set<ActionExecutionModeEnum>? = null,
-    val priority: Int? = null,
-    val action: IPolicyActionRefOrValue
+    val priority: Int? = null
 )

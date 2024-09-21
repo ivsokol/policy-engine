@@ -1,0 +1,6 @@
+{
+    "source": "subject",
+    "key": "foo",
+    "path": ".a1.a2",
+    "engine": "JQ"
+}

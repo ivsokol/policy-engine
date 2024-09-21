@@ -1,0 +1,20 @@
+{
+    "id": "polAct1",
+    "version": "1.2.3",
+    "description": "This is a managed PolicyActionJsonMerge",
+    "labels": [
+        "label1"
+    ],
+    "key": "someJson",
+    "source": {
+        "id": "polVar1",
+        "refType": "PolicyVariableRef"
+    },
+    "merge": {
+        "type": "string",
+        "value": "{\"foo\":\"baz\"}"
+    },
+    "failOnMissingKey": true,
+    "failOnNullSource": true,
+    "type": "jsonMerge"
+}

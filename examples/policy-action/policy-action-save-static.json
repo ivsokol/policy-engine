@@ -1,0 +1,9 @@
+{
+    "key": "foo",
+    "value": {
+        "type": "string",
+        "value": "bar"
+    },
+    "failOnExistingKey": true,
+    "type": "save"
+}

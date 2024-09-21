@@ -5,7 +5,8 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * Enum representing the different types of policy entities that can be defined in the system.
+ * Enum representing the different types of policy entities that can be defined in the system and in
+ * expression language.
  * - `VARIABLE_DYNAMIC`: Represents a dynamic policy variable.
  * - `VARIABLE_STATIC`: Represents a static policy variable.
  * - `VALUE_RESOLVER`: Represents a value resolver for dynamic policy variables.
@@ -23,6 +24,12 @@ import kotlinx.serialization.Serializable
  * - `POLICY_CATALOG`: Represents a policy catalog.
  * - `ENGINE_START`: Represents the start of the policy engine execution.
  * - `ENGINE_END`: Represents the end of the policy engine execution.
+ * - `REFERENCE`: Represents a reference to the entity.
+ * - `DSL`: Represents a domain-specific language.
+ * - `CONTENT`: Represents a content in expression language.
+ * - `CONSTRAINT`: Represents a policy constraint.
+ * - `ACTION_RELATIONSHIP`: Represents a relationship between IPolicy and actions.
+ * - `POLICY_RELATIONSHIP`: Represents a relationship between PolicySet and child policies.
  */
 enum class PolicyEntityEnum {
   VARIABLE_DYNAMIC,
@@ -41,7 +48,13 @@ enum class PolicyEntityEnum {
   POLICY_ACTION_JSON_MERGE,
   POLICY_CATALOG,
   ENGINE_START,
-  ENGINE_END
+  ENGINE_END,
+  REFERENCE,
+  DSL,
+  CONTENT,
+  CONSTRAINT,
+  ACTION_RELATIONSHIP,
+  POLICY_RELATIONSHIP,
 }
 
 /**

@@ -1,0 +1,7 @@
+{
+    "resolvers": [
+        {
+            "key": "foo"
+        }
+    ]
+}

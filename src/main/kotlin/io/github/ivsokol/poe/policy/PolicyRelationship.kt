@@ -18,8 +18,8 @@ const val DEFAULT_RUN_ACTION = true
  */
 @Serializable
 data class PolicyRelationship(
+    val policy: IPolicyRefOrValue,
     val constraint: IPolicyConditionRefOrValue? = null,
     val runAction: Boolean? = null,
-    val priority: Int? = null,
-    val policy: IPolicyRefOrValue
+    val priority: Int? = null
 )
