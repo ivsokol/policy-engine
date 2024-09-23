@@ -7,10 +7,13 @@ permalink: /
 
 # Policy Engine - PoE
 
-<br />
-<br />
+<br>
 
-PolicyEngine - PoE is a catalog driven policy engine written in Kotlin. It provides a flexible framework for defining and evaluating
+![Policies banner](./assets/policies-banner.jpeg "banner")
+
+<br>
+
+**PolicyEngine - PoE** is a catalog driven policy engine written in Kotlin. It provides a flexible framework for defining and evaluating
 policies and conditions based on the provided context.
 
 PoE is designed to be used as a library in various enterprise applications, for scenarios as [access control](docs/examples/access-control.md), authorization, credit scoring, price calculation or any other use
