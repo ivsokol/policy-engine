@@ -108,7 +108,11 @@ By having this kind of architecture, you can define policies in a declarative wa
 different applications and change them in runtime (for example by providing a catalog through a REST API or pulling it from a database). In that way you can deploy new catalog version
 without redeploying your application.
 
-Another advantage is that policies are not only providing a result (permit/deny), but also additional information, if such information is needed. In the [variation](docs/examples/pet-example.md#pet-owner-can-update-pet-information-two-variations-of-pet-object) of simple pet example, it is possible to define a message (static or dynamic) for the end user, and such message can be pulled from the context data store after evaluation.
+Another advantage is that policies are not only providing a result (permit/deny), but also additional information, if such information is needed. In the [variation](docs/examples/pet-example.md#pet-owner-can-update-pet-information---variation-with-additional-message) of simple pet example, it is possible to define a message (static or dynamic) for the end user, and such message can be pulled from the context data store after evaluation.
+
+In the data model [variation](docs/examples/pet-example.md#pet-owner-can-update-pet-information-two-variations-of-pet-object)
+of simple pet example, where there are two variations of pet object, it is possible to define a resolver for each
+variation. This allows engine to handle dynamic evolution of data model in the runtime, without app redeployment.
 
 To summarize, these are advantages of using PoE:
 
