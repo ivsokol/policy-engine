@@ -27,6 +27,7 @@ baseurl: "/policy-engine" # the subpath of your site, e.g. /blog
 url: "https://ivsokol.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 repository: ivsokol/policy-engine # for github-metadata
 google_site_verification: bnfzVW93lK8dIe2N8eUf7fGPIFuBdbjbMjhOLBjU7xc
+lang: en
 
 # Build settings
 # theme: just-the-docs
