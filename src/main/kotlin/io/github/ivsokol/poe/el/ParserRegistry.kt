@@ -183,6 +183,7 @@ object ParserRegistry {
               "*act",
               PolicyEntityEnum.DSL,
               listOf(
+                  PolicyEntityEnum.POLICY_ACTION,
                   PolicyEntityEnum.POLICY_ACTION_SAVE,
                   PolicyEntityEnum.POLICY_ACTION_CLEAR,
                   PolicyEntityEnum.POLICY_ACTION_JSON_MERGE,

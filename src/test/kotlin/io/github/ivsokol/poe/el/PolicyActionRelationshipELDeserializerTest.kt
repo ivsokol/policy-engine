@@ -89,6 +89,23 @@ class PolicyActionRelationshipELDeserializerTest :
           val actual = PEELParser(given).parsePolicy()
           actual shouldBe expected
         }
+        it("has action in action rel") {
+          val given = """#permit(*act(*save(foo,#str(bar))))"""
+          val expected =
+              PolicyDefault(
+                  PolicyResultEnum.PERMIT,
+                  actions =
+                      listOf(
+                          PolicyActionRelationship(
+                              PolicyActionSave(
+                                  key = "foo",
+                                  value =
+                                      PolicyVariableStatic(
+                                          value = "bar", type = VariableValueTypeEnum.STRING)))))
+
+          val actual = PEELParser(given).parsePolicy()
+          actual shouldBe expected
+        }
         it("has multiple actions") {
           val given = """#permit(*save(foo,#str(bar)),*clear(foo2))"""
           val expected =
@@ -177,7 +194,7 @@ class PolicyActionRelationshipELDeserializerTest :
         it("should throw on bad relationship class ") {
           val given = """#permit(*act(#int(1))))"""
           shouldThrow<IllegalStateException> { PEELParser(given).parsePolicy() }.message shouldBe
-              "Child command type mismatch on position 13 for command '*act'. Expected: 'POLICY_ACTION_SAVE, POLICY_ACTION_CLEAR, POLICY_ACTION_JSON_MERGE, POLICY_ACTION_JSON_PATCH, REFERENCE', actual: 'VARIABLE_STATIC'"
+              "Child command type mismatch on position 13 for command '*act'. Expected: 'POLICY_ACTION, POLICY_ACTION_SAVE, POLICY_ACTION_CLEAR, POLICY_ACTION_JSON_MERGE, POLICY_ACTION_JSON_PATCH, REFERENCE', actual: 'VARIABLE_STATIC'"
         }
         it("should throw on relationship content") {
           val given = """#permit(*act(content))"""

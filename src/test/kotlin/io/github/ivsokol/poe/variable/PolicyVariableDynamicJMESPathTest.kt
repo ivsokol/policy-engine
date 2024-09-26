@@ -28,7 +28,7 @@ private val fullObjectBody =
         "bigD" to BigDecimal("3.14"),
         "array" to listOf(1, 2, 3),
         "object" to mapOf("a1" to "b1"),
-        "strObj" to """{"a2":"b2"}""",
+        "strObj" to """{"a2":"b2"}""".toJsonAny(),
         "foo" to FooDynamicJMESPath(BarDynamicJMESPath("b1")))
 
 private val subjectStore = mapOf("foo" to FooDynamicJMESPath(BarDynamicJMESPath("b2")))
@@ -185,6 +185,15 @@ class PolicyVariableDynamicJMESPathTest :
                       type = VariableValueTypeEnum.OBJECT,
                       format = VariableValueFormatEnum.JSON)),
                   NullVariableValue()),
+              PolicyVariableDynamicJMESPathTestData(
+                  (PolicyVariableDynamic(
+                      resolvers =
+                          listOf(
+                              PolicyVariableResolver(
+                                  engine = PolicyVariableResolverEngineEnum.JMES_PATH,
+                                  path = "strObj.a2")),
+                      type = VariableValueTypeEnum.STRING)),
+                  VariableValue(VariableRuntimeTypeEnum.STRING, "b2")),
               PolicyVariableDynamicJMESPathTestData(
                   (PolicyVariableDynamic(
                       resolvers =

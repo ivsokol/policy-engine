@@ -28,7 +28,7 @@ private val fullObjectBody =
         "bigD" to BigDecimal("3.14"),
         "array" to listOf(1, 2, 3),
         "object" to mapOf("a1" to "b1"),
-        "strObj" to """{"a2":"b2"}""",
+        "strObj" to """{"a2":"b2"}""".toJsonAny(),
         "foo" to FooDynamicJQ(BarDynamicJQ("b1")))
 
 private val subjectStore = mapOf("foo" to FooDynamicJQ(BarDynamicJQ("b2")))
@@ -167,6 +167,15 @@ class PolicyVariableDynamicJQTest :
                   VariableValue(
                       VariableRuntimeTypeEnum.OBJECT_NODE,
                       objectMapper.readTree("""{"a1":"b1"}"""))),
+              PolicyVariableDynamicJQTestData(
+                  (PolicyVariableDynamic(
+                      resolvers =
+                          listOf(
+                              PolicyVariableResolver(
+                                  path = ".strObj.a2",
+                                  engine = PolicyVariableResolverEngineEnum.JQ)),
+                      type = VariableValueTypeEnum.STRING)),
+                  VariableValue(VariableRuntimeTypeEnum.STRING, "b2")),
               PolicyVariableDynamicJQTestData(
                   (PolicyVariableDynamic(
                       resolvers =
