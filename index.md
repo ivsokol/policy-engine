@@ -29,6 +29,100 @@ it is up to the client to provide all necessary data to the engine as part of th
 
 Engine also ships with expression language support (PEEL - [PolicyEngine Expression Language](docs/expression-language/index)). It allows users to define custom conditions and policies through strings that can be evaluated by the engine.
 
+## Simple example
+
+**Only pet owner can update pet information**
+
+We want to allow only pet owners to update pet information, and deny for others.
+
+```kotlin
+test("only pet owner can update pet information") {
+    // define owner in subject store
+    val owner = json.decodeFromString<Map<String, String?>>("""{"username" : "jDoe"}""")
+    // prepare request payload
+    val request =
+        mapOf(
+            "pet" to """{"kind": "dog", "name" : "Fido","owner" : "jDoe"}""".toJsonAny(),
+            "action" to "update")
+    // define policy
+    val policy =
+        """
+                *permit(
+                    *eq(
+                        *dyn(*key(username,#opts(source=subject))),
+                        *dyn(*jq(.pet.owner))
+                    ),
+                    #opts(strictTargetEffect)
+                )
+            """
+            .trimIndent()
+    // prepare context
+    val context = Context(subject = owner, request = request)
+    // evaluate policy
+    val resultOwner = PolicyEngine().evaluatePolicy(PEELParser(policy).parsePolicy(), context)
+    // will print 'permit'
+    println(resultOwner.first)
+    resultOwner.first shouldBe PolicyResultEnum.PERMIT
+
+    // now let's try to update pet info without being owner
+    val notOwner = json.decodeFromString<Map<String, String?>>("""{"username" : "mSmith"}""")
+
+    val newContext = Context(subject = notOwner, request = request)
+    val resultNotOwner =
+        PolicyEngine().evaluatePolicy(PEELParser(policy).parsePolicy(), newContext)
+    // will print 'deny'
+    println(resultNotOwner.first)
+    resultNotOwner.first shouldBe PolicyResultEnum.DENY
+}
+```
+
+This example shows how easy it is to define a policy and evaluate it by using PolicyEngine expression language. It is simple example that can evolve into more complex policies, depending on the requirements.
+
+Engine can support multiple variations on input stores (strings, maps, objects). It can also work with old and new object versions at the same time, if data model was upgraded.
+
+Business requirements can grow more complex over time, like covering read action to be permitted for everyone or providing welcome or warning message for users.
+
+All these examples are covered in the [Pet Example](docs/examples/pet-example)
+page, and in repository [PetTest](https://github.com/ivsokol/policy-engine/blob/main/src/test/kotlin/io/github/ivsokol/poe/examples/catalog/PetTest.kt).
+
+## Competitive advantage over other libraries
+
+Looking at the simple example above, one can arrive at the conclusion that it is easier to implement the same
+functionality by using simple conditional statements in code. And that is correct. If you need to define static policies,
+then it is easier and faster to write the code.
+
+Problem with static code arises when you need to define policies that can be changed over time. In that case, if you write static code, every time
+you need to change the policy, you need to recompile the code and deploy your application.
+
+There are ways to solve this problem by using dynamic languages, like Groovy or JavaScript, but that leads to the restriction that
+only individuals experienced in those languages can create or change the policy.
+
+Main goal of this library is to provide an engine that evaluates policies based on provided policy catalog (it serves as Policy Decision Point - **PDP**; check [here](https://docs.oasis-open.org/xacml/3.0/xacml-3.0-core-spec-os-en.html#_Toc325047068) and [here](https://docs.oasis-open.org/xacml/3.0/xacml-3.0-core-spec-os-en.html#_Toc325047088) for more details).
+
+Policy definitions (hundreds or thousands of them) can be defined in a separate entity called Policy Administration
+Point - **PAP**. This entity can be a separate application, with its own GUI and API optimized for Policy creation. It can be adjusted for business users, to allow them to create policies or conditions by populating predefined forms for such entities, or by using AI to generate policies.
+
+For all other simple cases, Policy Engine Expression Language can be used to define policies in a declarative way.
+
+By having this kind of architecture, you can define policies in a declarative way, and then use the same policies in
+different applications and change them in runtime (for example by providing a catalog through a REST API or pulling it from a database). In that way you can deploy new catalog version
+without redeploying your application.
+
+Another advantage is that policies are not only providing a result (permit/deny), but also additional information, if such information is needed. In the [variation](docs/examples/pet-example.md#pet-owner-can-update-pet-information-two-variations-of-pet-object) of simple pet example, it is possible to define a message (static or dynamic) for the end user, and such message can be pulled from the context data store after evaluation.
+
+To summarize, these are advantages of using PoE:
+
+* **Catalog driven** - Policy Engine runs on provided Policy Catalog definitions
+* **Dynamic behaviour** - Policy Catalog can be defined in a separate application, and then loaded into the engine, thus supporting dynamic change without application redeployment.
+* **Declarative** - Policy Catalog can be defined in a declarative way, using Policy Engine Expression Language.
+* **Additional information** - Policy Engine can provide additional information, like message for the end user, or a
+  list of resources that are permitted or denied together with Policy evaluation result.
+* **Policy and condition evaluation** - Policy Engine can evaluate both policy and condition expressions.
+* **Adaptable to any input data model** - Policy Engine can work with any data model, as long as it is possible to convert it to a string or a map.
+* **Multi-tenancy** - Policy Engine can work with multiple tenants, by using different Policy Catalogs for each tenant.
+* **Customizable** - Policy Engine can be customized to fit your needs. Every Policy Engine entity has a set of options that
+  can be defined, thus adjusting execution behaviour of an entity.
+
 ### Inspiration
 
 PoE was inspired by [eXtensible Access Control Markup Language](https://docs.oasis-open.org/xacml/3.0/xacml-3.0-core-spec-os-en.html). Even though it
@@ -58,10 +152,14 @@ PolicyEngine is based on following entities:
 In order to use PoE in your project, you need to add the following dependency to your project:
  
 ```kotlin
-implementation("io.github.ivsokol:poe:1.1.0")
+implementation("io.github.ivsokol:poe:1.2.0")
 ```
 
 After that you need to define a PolicyCatalog and instantiate a PolicyEngine.
+
+Examples below are **code snippets** and not full examples. If you want to check full examples with explanations, please
+visit [examples](docs/examples) page,
+or check catalog tests in [repository](https://github.com/ivsokol/policy-engine/tree/main/src/test/kotlin/io/github/ivsokol/poe/examples/catalog).
 
 ```kotlin
 val catalog = "..."

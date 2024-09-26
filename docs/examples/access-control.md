@@ -26,6 +26,9 @@ In this example, we will create a simple access control policy based on followin
 
 To resolve such demand, we need to extract user role from the context and check if current time is within working hours. Working hour check should be done only if user role is "user". Depending on policy result resolution we shall build message and save it to data store.
 
+Example code can be found in
+the [repository](https://github.com/ivsokol/policy-engine/blob/main/src/test/kotlin/io/github/ivsokol/poe/examples/catalog/AccessControlTest.kt).
+
 # Policy Catalog
 
 In order to achieve this, we will create a PolicyCatalog with following entities:
