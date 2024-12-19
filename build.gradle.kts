@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  val kotlinVersion = "2.0.20"
+  val kotlinVersion = "2.1.0"
 
   kotlin("jvm") version kotlinVersion
   kotlin("plugin.serialization") version kotlinVersion
@@ -10,14 +10,14 @@ plugins {
   `maven-publish`
 
   id("com.diffplug.spotless") version "6.25.0"
-  id("org.jetbrains.dokka") version "1.9.20"
-  id("org.jetbrains.kotlinx.kover") version "0.8.3"
-  id("org.jreleaser") version "1.13.1"
+  id("org.jetbrains.dokka") version "2.0.0"
+  id("org.jetbrains.kotlinx.kover") version "0.9.0"
+  id("org.jreleaser") version "1.15.0"
 }
 
 group = "io.github.ivsokol"
 
-version = "1.2.0"
+version = "1.2.1"
 
 repositories {
   mavenLocal()
@@ -31,13 +31,12 @@ dependencies {
   implementation("io.burt:jmespath-jackson:${project.property("jmesPathJacksonVersion")}")
   implementation("com.arakelian:java-jq:${project.property("jjqVersion")}")
   implementation(
-      "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${project.property("jacksonJSR310Version")}")
+      "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${project.property("jacksonVersion")}")
   implementation("ch.qos.logback:logback-classic:${project.property("logbackVersion")}")
   implementation("com.github.fslev:json-compare:${project.property("jsonCompareVersion")}")
   implementation("io.vertx:vertx-json-schema:${project.property("vertxJsonSchemaVersion")}")
   implementation("com.aventrix.jnanoid:jnanoid:${project.property("nanoIdVersion")}")
-  implementation(
-      "com.github.java-json-tools:json-patch:${project.property("jsonPatchVersion")}") // 1.13
+  implementation("com.github.java-json-tools:json-patch:${project.property("jsonPatchVersion")}")
 
   testImplementation("io.kotest:kotest-runner-junit5:${project.property("kotestVersion")}")
   testImplementation("io.kotest:kotest-assertions-json-jvm:${project.property("kotestVersion")}")
