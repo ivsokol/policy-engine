@@ -156,7 +156,7 @@ PolicyEngine is based on following entities:
 In order to use PoE in your project, you need to add the following dependency to your project:
  
 ```kotlin
-implementation("io.github.ivsokol:poe:1.2.0")
+implementation("io.github.ivsokol:poe:1.2.1")
 ```
 
 After that you need to define a PolicyCatalog and instantiate a PolicyEngine.
